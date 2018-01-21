@@ -4,11 +4,16 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   styleUrls: ['app.component.scss'],
   template: `
-    <div class="app">
-      Hello!
-    </div>
+      <div class="app">
+        {{ title }}
+      </div>
   `
 })
 export class AppComponent {
 
+  title: string;
+
+  constructor() {
+    this.title = 'Ultimate Angular1';
+  }
 }
