@@ -6,9 +6,10 @@ import { Component } from '@angular/core';
   template: `
       <div class="app">
         
-        <button (click)="handleClick()">
-          Change Name
+        <button (click)="handleClick(username.value)">
+          Get Value
         </button>
+        
         <!--<input -->
           <!--type="text" -->
           <!--[value]="name"-->
@@ -18,15 +19,20 @@ import { Component } from '@angular/core';
         
         <div>{{ name }}</div>
 
-        <input
-          type="text"
-          [ngModel]="name"
-          (ngModelChange)="handleChange($event)"
-        />
+        <!--<input-->
+          <!--type="text"-->
+          <!--[ngModel]="name"-->
+          <!--(ngModelChange)="handleChange($event)"-->
+        <!--/>-->
 
+        <!--<input-->
+          <!--type="text"-->
+          <!--[(ngModel)]="name"-->
+        <!--/>-->
+        
         <input
           type="text"
-          [(ngModel)]="name"
+          #username
         />
 
       </div>
@@ -39,9 +45,14 @@ export class AppComponent {
   constructor() {
   }
 
-  handleClick() {
-    this.name = "NOEL!";
+  handleClick(value: string) {
+    console.log('Name = ', value);
   }
+
+
+  // handleClick() {
+  //   this.name = "NOEL!";
+  // }
 
   // handleBlur(event: any) {
   //   console.log(event);
@@ -52,9 +63,9 @@ export class AppComponent {
   //   this.name = event.target.value;
   // }
 
-  handleChange(value: string) {
-    this.name = value;
-  }
+  // handleChange(value: string) {
+  //   this.name = value;
+  // }
 
 }
 
