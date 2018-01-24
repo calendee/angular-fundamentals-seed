@@ -32,9 +32,10 @@ export class PassengerDashboardComponent implements OnInit{
   constructor(private passengerService: PassengerDashboardService) {}
 
   ngOnInit() {
+    // Using a promise instead of a subscribe
     this.passengerService
       .getPassengers()
-      .subscribe((data: Passenger[]) => this.passengers = data);
+      .then((data: Passenger[]) => this.passengers = data);
   }
 
   handleRemove(event) {

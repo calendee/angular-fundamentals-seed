@@ -4,6 +4,7 @@ import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Passenger } from "./models/passenger.interface";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 const PASSENGER_API:string = '/api/passengers';
 
@@ -12,10 +13,12 @@ export class PassengerDashboardService {
 
   constructor(private http: Http) {}
 
-  getPassengers(): Observable<Passenger[]> {
+  // Using a promise instead of observable with map and subscribe
+  getPassengers(): Promise<Passenger[]> {
     return this.http
       .get(PASSENGER_API)
-      .map((response: Response) => response.json());
+      .toPromise()
+      .then((response: Response) => response.json());
   }
 
   updatePassenger(passenger: Passenger): Observable<Passenger> {
