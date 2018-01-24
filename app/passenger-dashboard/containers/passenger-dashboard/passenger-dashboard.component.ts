@@ -35,7 +35,10 @@ export class PassengerDashboardComponent implements OnInit{
     // Using a promise instead of a subscribe
     this.passengerService
       .getPassengers()
-      .then((data: Passenger[]) => this.passengers = data);
+      .then((data: Passenger[]) => this.passengers = data )
+      .catch((error) => {
+        console.log('Failed to get passengers: ', error);
+      })
   }
 
   handleRemove(event) {
@@ -46,6 +49,8 @@ export class PassengerDashboardComponent implements OnInit{
         this.passengers = this.passengers.filter((passenger: Passenger) => {
           return passenger.id !== event.id
         });
+      }, (error: any) => {
+        console.log('Failed to remove passenger: ', error);
       });
   }
 
@@ -60,7 +65,8 @@ export class PassengerDashboardComponent implements OnInit{
           }
           return passenger;
         });
-
+      }, (error: any) => {
+        console.log('Failed to edit passenger :', error);
       });
 
   }
