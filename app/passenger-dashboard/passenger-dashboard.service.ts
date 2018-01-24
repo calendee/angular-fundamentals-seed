@@ -23,6 +23,13 @@ export class PassengerDashboardService {
       .then((response: Response) => response.json());
   }
 
+  getPassenger(id: number): Observable<Passenger> {
+    return this.http
+      .get(`${PASSENGER_API}/${id}`)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json));
+  }
+
   updatePassenger(passenger: Passenger): Observable<Passenger> {
 
     // NOTE : headers and request options are actually not needed in this example because the default for HTTP
