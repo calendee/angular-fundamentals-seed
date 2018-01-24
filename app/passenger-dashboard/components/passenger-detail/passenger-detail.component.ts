@@ -15,13 +15,13 @@ import { Passenger } from "../../models/passenger.interface";
       <div *ngIf="editing">
         <input
           type="text" 
-          [value]="detail.fullName"
+          [value]="detail.fullname"
           (input)="onNameChange(name.value)"
           #name>
       </div>
       
       <div *ngIf="!editing">
-        {{ detail.fullName }}  
+        {{ detail.fullname }}  
       </div>
       
       <div class="date">
