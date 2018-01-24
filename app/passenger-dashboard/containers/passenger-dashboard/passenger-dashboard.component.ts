@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Passenger} from "../../models/passenger.interface";
+import { PassengerDashboardService } from "../../passenger-dashboard.service";
 
 @Component({
   selector: 'passenger-dashboard',
@@ -10,6 +11,10 @@ import { Passenger} from "../../models/passenger.interface";
       <passenger-count
         [items]="passengers">
       </passenger-count>
+      
+      <div *ngFor="let passenger of passengers;">
+        {{passenger.fullName}}
+      </div>
       
       <passenger-detail
         *ngFor="let passenger of passengers;"
@@ -24,41 +29,10 @@ export class PassengerDashboardComponent implements OnInit{
 
   passengers: Passenger[];
 
-  constructor() {}
+  constructor(private passengerService: PassengerDashboardService) {}
 
   ngOnInit() {
-
-    console.log('ngOnInit!');
-    this.passengers = [
-      {
-        id: 1,
-        fullName: 'Stephen',
-        checkedIn: true,
-        checkInDate: 1490742000000,
-        children: null
-      },
-      {
-        id: 2,
-        fullName: 'Rose',
-        checkedIn: false,
-        checkInDate: null,
-        children: [{name: 'Ted', age: 12}, {name: 'Chloe', age: 7}]
-      },
-      {
-        id: 3,
-        fullName: 'James',
-        checkedIn: true,
-        checkInDate: 1490742000000,
-        children: null
-      },
-      {
-        id: 4,
-        fullName: 'Louise',
-        checkedIn: true,
-        checkInDate: null,
-        children: null
-      },
-    ];
+    this.passengers = this.passengerService.getPassengers();
   }
 
   handleRemove(event) {
@@ -68,13 +42,11 @@ export class PassengerDashboardComponent implements OnInit{
   }
 
   handleEdit(event: Passenger) {
-    console.log('Edit = ', event);
     this.passengers = this.passengers.map((passenger: Passenger) =>  {
       if(passenger.id === event.id) {
         passenger = Object.assign({}, passenger, event);
       }
       return passenger;
     });
-    console.table(this.passengers);
   }
 }
