@@ -68,7 +68,7 @@ export class PassengerDetailComponent implements OnChanges {
   }
 
   onNameChange(value: string) {
-    this.detail.fullName = value;
+    this.detail.fullname = value;
   }
 
   toggleEdit() {
