@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Passenger} from "../../models/passenger.interface";
 import { PassengerDashboardService } from "../../passenger-dashboard.service";
@@ -19,6 +20,7 @@ import { PassengerDashboardService } from "../../passenger-dashboard.service";
       <passenger-detail
         *ngFor="let passenger of passengers;"
         [detail]="passenger"
+        (view)="handleView($event)"
         (remove)="handleRemove($event)"
         (edit)="handleEdit($event)">
       </passenger-detail>
@@ -29,7 +31,9 @@ export class PassengerDashboardComponent implements OnInit{
 
   passengers: Passenger[];
 
-  constructor(private passengerService: PassengerDashboardService) {}
+  constructor(
+    private router: Router,
+    private passengerService: PassengerDashboardService) {}
 
   ngOnInit() {
     // Using a promise instead of a subscribe
@@ -69,5 +73,9 @@ export class PassengerDashboardComponent implements OnInit{
         console.log('Failed to edit passenger :', error);
       });
 
+  }
+
+  handleView(event: Passenger) {
+    this.router.navigate(['/passengers', event.id])
   }
 }
