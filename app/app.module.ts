@@ -23,7 +23,7 @@ const routes: Routes = [
   ],
   imports: [
     // Angular modules
-    BrowserModule, 
+    BrowserModule,
     CommonModule,
     RouterModule.forRoot(routes),
 
